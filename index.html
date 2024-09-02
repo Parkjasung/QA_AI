@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>분할 레이아웃 예제</title>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            display: flex;
+            height: 100%;
+        }
+        .menu {
+            width: 200px;
+            background-color: #f0f0f0;
+            padding: 20px;
+        }
+        .content {
+            flex-grow: 1;
+            padding: 20px;
+        }
+        .menu ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        .menu li {
+            margin-bottom: 10px;
+        }
+        .menu a {
+            text-decoration: none;
+            color: #333;
+        }
+        .menu a:hover {
+            color: #0066cc;
+        }
+        .page {
+            display: none;
+        }
+        .page.active {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="menu">
+            <ul>
+                <li><a href="#" data-page="home">홈</a></li>
+                <li><a href="#" data-page="about">소개</a></li>
+                <li><a href="#" data-page="contact">연락처</a></li>
+            </ul>
+        </div>
+        <div class="content">
+            <div id="home" class="page active">
+                <h1>홈</h1>
+                <p>환영합니다! 이곳은 홈 페이지입니다.</p>
+            </div>
+            <div id="about" class="page">
+                <h1>소개</h1>
+                <p>이 웹사이트는 분할 레이아웃 예제를 보여주기 위해 만들어졌습니다.</p>
+            </div>
+            <div id="contact" class="page">
+                <h1>연락처</h1>
+                <p>이메일: example@example.com</p>
+                <p>전화: 123-456-7890</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const menuLinks = document.querySelectorAll('.menu a');
+            const pages = document.querySelectorAll('.page');
+
+            menuLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const pageId = this.getAttribute('data-page');
+                    pages.forEach(page => page.classList.remove('active'));
+                    document.getElementById(pageId).classList.add('active');
+                });
+            });
+        });
+    </script>
+</body>
+</html>
